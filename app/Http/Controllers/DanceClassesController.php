@@ -13,11 +13,20 @@ class DanceClassesController extends Controller
         return Streams::entries('danceclasses')->get();
     }
 
-    public function getByInstructor(Request $request)
+    public function getClassByInstructor(Request $request)
     {
         return Streams::entries('danceclasses')
             ->where('instructor', '=', $request->instructor)
             ->get();
+    }
+
+    public function getClassByDate(Request $request)
+    {
+        $date = new DateTime($request->date);
+        return Streams::entries('danceclasses')
+            ->where('date_of_class', '=', $date->format('Y-m-d'))
+            ->first()
+            ->id;
     }
 
     public function create(Request $request)
@@ -28,7 +37,7 @@ class DanceClassesController extends Controller
             'date_of_class' => $date->format('Y-m-d'),
 
             //optional pieces
-            'assistant' => $request->assistant ?? 'fox',
+            'assistant' => $request->assistant ?? '',
             'total_students' => $request->total_students ?? 0,
             'students_from_last_week' => $request->students_from_last_week ?? 0,
             'returning_students' => $request->returning_students ?? 0,

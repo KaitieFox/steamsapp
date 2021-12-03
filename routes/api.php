@@ -21,7 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('classes')->group(function () {
     //get
     Route::streams('all', 'App\Http\Controllers\DanceClassesController@getAllClasses');
-    Route::streams('/instructor/{instructor}', 'App\Http\Controllers\DanceClassesController@getByInstructor');
+    Route::streams('/instructor/{instructor}', 'App\Http\Controllers\DanceClassesController@getClassByInstructor');
+    Route::streams('/date', 'App\Http\Controllers\DanceClassesController@getClassByDate');
 
     //post
     // it's not working because of a crsf issue.
