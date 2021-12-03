@@ -17,5 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// show me something from the controller
-Route::streams('uri', 'App\Http\Controller\ClassesController@show');
+Route::prefix('classes')->group(function () {
+    //get
+    Route::streams('all', 'App\Http\Controllers\DanceClassesController@getAllClasses');
+    Route::streams('/instructor/{instructor}','App\Http\Controllers\DanceClassesController@getByInstructor');
+    
+    //post
+    // it's not working because of a crsf issue.
+    Route::streams('new', [
+        'uses' => 'App\Http\Controllers\DanceClassesController@create',
+        'verb' => 'post'
+    ]);
+
+    
+});
