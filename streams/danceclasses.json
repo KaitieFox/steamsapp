@@ -1,0 +1,55 @@
+{
+    "name": "Dance Classes",
+    "description": "The data related to classes over time",
+    "fields": {
+        "id": {
+            "required": true,
+            "type": "uuid",
+            "unique": true
+        },
+        "instructor": {
+            "required": true,
+            "type": "select",
+            "config": {
+                "options": {
+                    "fox": "fox",
+                    "madelyn": "madelyn",
+                    "michelle": "michelle",
+                    "tasha": "tasha",
+                    "genni": "genni",
+                    "craig": "craig"
+                }
+            }
+        },
+        "assistant": {
+            "type": "select",
+            "config": {
+                "options": {
+                    "fox": "fox",
+                    "madelyn": "madelyn",
+                    "michelle": "michelle",
+                    "tasha": "tasha",
+                    "genni": "genni",
+                    "craig": "craig"
+                }
+            }
+        },
+        "date_of_class": {
+            "required": true,
+            "unique": true,
+            "type": "datetime"
+        },
+        "total_students": {
+            "type": "integer"
+        },
+        "students_from_last_week": {
+            "type": "integer"
+        },
+        "returning_students": {
+            "type": "integer"
+        },
+        "new_students": {
+            "type": "integer"
+        }
+    }
+}

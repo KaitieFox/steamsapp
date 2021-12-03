@@ -1,0 +1,23 @@
+{
+    "name": "StudentsClasses",
+    "abstract": "Streams\\Core\\Entry\\Entry",
+    "repository": "Streams\\Core\\Repository\\Repository",
+    "collection": "Illuminate\\Support\\Collection",
+    "fields": {
+        "id": {
+            "type": "uuid"
+        },
+        "student": {
+            "type": "relationship",
+            "config": {
+                "related": "students"
+            }
+        },
+        "class": {
+            "type": "relationship",
+            "config": {
+                "related": "classes"
+            }
+        }
+    }
+}

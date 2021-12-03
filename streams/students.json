@@ -1,0 +1,21 @@
+{
+    "name": "Students",
+    "description": "A list of unique students",
+    "fields": {
+        "id": {
+            "type": "uuid",
+            "unique": true,
+            "required": true
+        },
+        "name": {
+            "type": "string",
+            "required": true
+        },
+        "class": {
+            "type": "relationship",
+            "config": {
+                "related": "danceclasses"
+            }
+        }
+    }
+}
