@@ -37,6 +37,19 @@ class DanceClassesController extends Controller
         $class->save();
         return $class;
     }
+
+    public function update(Request $request)
+    {
+        $class = Streams::entries('danceclasses')->find($request->id);
+        $collection = $request->collect();
+        $collection->map(function ($value, $key) use ($class) {
+            if ($value) {
+                $class->$key = $value;
+            }
+        });
+        $class->save();
+        return $class;
+    }
 }
 
 //https://streams.dev/docs/core/repositories lol improve that page. there's nothing there.
