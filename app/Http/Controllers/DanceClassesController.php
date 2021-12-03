@@ -10,14 +10,14 @@ class DanceClassesController extends Controller
 {
     public function getAllClasses()
     {
-        return Streams::entries('danceclasses')->get(); 
+        return Streams::entries('danceclasses')->get();
     }
 
     public function getByInstructor(Request $request)
     {
         return Streams::entries('danceclasses')
-        ->where('instructor', '=', $request->instructor)
-        ->get();   
+            ->where('instructor', '=', $request->instructor)
+            ->get();
     }
 
     public function create(Request $request)
