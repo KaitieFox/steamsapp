@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,5 @@ Route::prefix('classes')->group(function () {
         'verb' => 'patch'
     ]);
 });
+
+Route::streams('students', ApiController::class . '@getUniqueStudentNames');
