@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\StudentService;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -23,11 +24,8 @@ class DanceClassesController extends Controller
 
     public function getClassByDate(Request $request)
     {
-        $date = new DateTime($request->date);
-        return Streams::entries('danceclasses')
-            ->where('date_of_class', '=', $date->format('Y-m-d'))
-            ->first()
-            ->id;
+        $s = resolve(StudentService::class);
+        echo $s->getAllUniqueStudents();
     }
 
     public function create(Request $request)

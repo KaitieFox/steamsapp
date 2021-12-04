@@ -28,8 +28,7 @@ class DanceClassService
         $newdate = new DateTime($date);
         return Streams::entries('danceclasses')
             ->where('date_of_class', '=', $newdate->format('Y-m-d'))
-            ->first()
-            ->id;
+            ->first();
     }
 
     public function create(Collection $data)
@@ -39,8 +38,6 @@ class DanceClassService
             'id' => Str::uuid(),
             'instructor' => $data->get('instructor'),
             'date_of_class' => $newdate->format('Y-m-d'),
-
-            //optional pieces
             'assistant' => $data->get('assistant'),
             'total_students' => $data->get('total_students'),
             'students_from_last_week' => $data->get('students_from_last_week'),

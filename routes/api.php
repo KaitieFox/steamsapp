@@ -39,7 +39,7 @@ Route::prefix('classes')->group(function () {
 });
 
 Route::streams('students', ApiController::class . '@getUniqueStudentNames');
-Route::streams('saveboth', [
-    'uses' => ApiController::class . '@saveClassAndStudents',
+Route::streams('handleSubmit', [
+    'uses' => ApiController::class . '@handleSubmit',
     'verb' => 'post'
 ]);
