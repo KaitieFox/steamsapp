@@ -21,4 +21,12 @@ class ApiController extends Controller
     {
         return $this->studentService->getAllUniqueStudents();
     }
+
+    public function saveClassAndStudents(Request $request)
+    {
+        $collect = collect($request->class);
+        $class = $this->classService->create($collect);
+        $this->studentService->create($class, collect($request->students));
+        return;
+    }
 }

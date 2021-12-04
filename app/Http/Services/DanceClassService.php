@@ -3,7 +3,8 @@
 namespace App\Http\Services;
 
 use DateTime;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Streams\Core\Support\Facades\Streams;
 
 
@@ -33,17 +34,18 @@ class DanceClassService
 
     public function create(Collection $data)
     {
-        $newdate = new DateTime($data->date);
-        $class = Streams::factory('danceclasses')->create([
-            'instructor' => $data->instructor,
+        $newdate = new DateTime($data->get('date'));
+        $class = Streams::entries('danceclasses')->create([
+            'id' => Str::uuid(),
+            'instructor' => $data->get('instructor'),
             'date_of_class' => $newdate->format('Y-m-d'),
 
             //optional pieces
-            'assistant' => $data->assistant ?? '',
-            'total_students' => $data->total_students ?? 0,
-            'students_from_last_week' => $data->students_from_last_week ?? 0,
-            'returning_students' => $data->returning_students ?? 0,
-            'new_students' => $data->new_students ?? 0,
+            'assistant' => $data->get('assistant'),
+            'total_students' => $data->get('total_students'),
+            'students_from_last_week' => $data->get('students_from_last_week'),
+            'returning_students' => $data->get('returning_students'),
+            'new_students' => $data->get('new_students'),
         ]);
         $class->save();
         return $class;

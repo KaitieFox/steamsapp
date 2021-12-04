@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Streams\Core\Support\Facades\Streams;
 
 class DanceClassesController extends Controller
@@ -32,16 +33,17 @@ class DanceClassesController extends Controller
     public function create(Request $request)
     {
         $date = new DateTime($request->date);
-        $class = Streams::factory('danceclasses')->create([
+        $class = Streams::entries('danceclasses')->create([
+            'id' => Str::uuid(),
             'instructor' => $request->instructor,
             'date_of_class' => $date->format('Y-m-d'),
 
             //optional pieces
-            'assistant' => $request->assistant ?? '',
-            'total_students' => $request->total_students ?? 0,
-            'students_from_last_week' => $request->students_from_last_week ?? 0,
-            'returning_students' => $request->returning_students ?? 0,
-            'new_students' => $request->new_students ?? 0,
+            'assistant' => $request->assistant,
+            'total_students' => $request->total_students,
+            'students_from_last_week' => $request->students_from_last_week,
+            'returning_students' => $request->returning_students,
+            'new_students' => $request->new_students,
         ]);
         $class->save();
         return $class;
