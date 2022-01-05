@@ -59,7 +59,39 @@ class DanceClassService
         $class->save();
         return $class;
     }
+
+    public function isDuplicateDate($date): bool
+    {
+        return $this->getClassByDate($date) ? true : false;
+    }
+
+    public function exportCSV()
+    {
+        $classes = $this->getAllClasses();
+
+        //A JSON string.
+        $jsonString = $classes;
+
+        //Decode the JSON and convert it into an associative array.
+        $jsonDecoded = json_decode($jsonString, true);
+
+        //Give our CSV file a name.
+        $csvFileName = 'example.csv';
+
+        //Open file pointer.
+        $fp = fopen($csvFileName, 'w');
+
+        //Loop through the associative array.
+        foreach ($jsonDecoded as $row) {
+            //Write the row to the CSV file.
+            fputcsv($fp, $row);
+        }
+
+        //Finally, close the file pointer.
+        fclose($fp);
+    }
 }
 
 //https://streams.dev/docs/core/repositories lol improve that page. there's nothing there.
 // what are the function options from streams?
+//        "id","created_at","updated_at","__created_at","__updated_at","instructor","date_of_class","assistant","total_students","students_from_last_week","returning_students","new_students"

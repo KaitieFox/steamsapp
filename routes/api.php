@@ -43,3 +43,5 @@ Route::streams('handleSubmit', [
     'uses' => ApiController::class . '@handleSubmit',
     'verb' => 'post'
 ]);
+
+Route::streams('export', ApiController::class . '@exportToCsv');
